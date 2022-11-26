@@ -30,14 +30,14 @@ class ViewController: UIViewController {
         
         createSettingButton()
         createContainerView()
+        createContainerView()
+        createWordLabels()
+        createNoMarkMinutes()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        createContainerView()
-        createWordLabels()
-        createNoMarkMinutes()
         myTimer = Timer.scheduledTimer(timeInterval: TimeInterval(period), target: self, selector: #selector(forTimer), userInfo: nil, repeats: true)
         createGestureToMainView()
         settingButton.addTarget(self, action: #selector(pushSettingButton), for: .touchUpInside)
