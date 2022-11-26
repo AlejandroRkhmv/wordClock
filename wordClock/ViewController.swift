@@ -59,7 +59,9 @@ class ViewController: UIViewController {
         containerView.frame = CGRect(x: 0, y: 0, width: sideOfContainerView, height: sideOfContainerView)
         containerView.center = self.view.center
         containerView.backgroundColor = .black
+        
         self.view.addSubview(containerView)
+        
     }
     
     private func createWordLabels() {
@@ -83,9 +85,8 @@ class ViewController: UIViewController {
             newLabel.textAlignment = .center
             newLabel.tag = index
             
-            //MARK: add gesture
-            let panGesture = UITapGestureRecognizer(target: self, action: #selector(panFinger(gesture:)))
-            newLabel.addGestureRecognizer(panGesture)
+            let labelGesture = UIPanGestureRecognizer(target: self, action: #selector(containerViewGesture(gesture:)))
+            containerView.addGestureRecognizer(labelGesture)
             
             wordLabelsArray.append(newLabel)
             containerView.addSubview(newLabel)
@@ -151,22 +152,23 @@ class ViewController: UIViewController {
     
     //MARK: add @objc func
     
+    @objc func containerViewGesture(gesture: UIPanGestureRecognizer) {
+        
+        for label in wordLabelsArray {
+            
+            let fingerPoint = gesture.location(in: label)
+            
+            if label.bounds.contains(fingerPoint) {
+                label.textColor = .white
+            }
+        }
+    }
+    
     @objc func mainGesture(gesture: UITapGestureRecognizer) {
         
         myTimer.invalidate()
         let secondVC = SecondViewController()
         self.navigationController?.pushViewController(secondVC, animated: false)
-    }
-    
-    @objc func panFinger(gesture: UITapGestureRecognizer) {
-        
-        let tag = gesture.view?.tag
-    
-        for (index, value) in wordLabelsArray.enumerated() {
-            if index == tag {
-                value.textColor = .white
-            }
-        }
     }
     
     @objc func forTimer() {
