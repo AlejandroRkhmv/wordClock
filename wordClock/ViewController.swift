@@ -26,10 +26,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = model.backgroundColor
-        
-        createSettingButton()
-        createContainerView()
         createContainerView()
         createWordLabels()
         createNoMarkMinutes()
@@ -37,6 +33,10 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        self.view.backgroundColor = model.backgroundColor
+        createSettingButton()
+        createContainerView()
         
         myTimer = Timer.scheduledTimer(timeInterval: TimeInterval(period), target: self, selector: #selector(forTimer), userInfo: nil, repeats: true)
         createGestureToMainView()
@@ -58,7 +58,7 @@ class ViewController: UIViewController {
         
         containerView.frame = CGRect(x: 0, y: 0, width: sideOfContainerView, height: sideOfContainerView)
         containerView.center = self.view.center
-        containerView.backgroundColor = .black
+        containerView.backgroundColor = model.backgroundColor
         self.view.addSubview(containerView)
     }
     
@@ -141,7 +141,7 @@ class ViewController: UIViewController {
         settingButton.frame = CGRect(x: 0, y: 0, width: 100, height: 30)
         settingButton.center = CGPoint(x: Int(self.view.bounds.size.width) - Int(rightPadding) - 50, y: 100)
         settingButton.setTitle("ADJUST", for: .normal)
-        settingButton.setTitleColor(.white, for: .normal)
+        settingButton.setTitleColor(model.textColor, for: .normal)
         settingButton.titleLabel?.font = UIFont.init(name: "Courier", size: 25)
         settingButton.backgroundColor = model.backgroundColor
         
@@ -176,7 +176,7 @@ class ViewController: UIViewController {
         whatLabelsMustLight()
         
         if countOfSeconds % 2 == 0 {
-            wordLabelsArray[model.IndexOfecondsDivision].textColor = .white
+            wordLabelsArray[model.IndexOfecondsDivision].textColor = model.textColor
         } else {
             wordLabelsArray[model.IndexOfecondsDivision].textColor = .darkGray
         }

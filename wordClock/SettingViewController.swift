@@ -15,7 +15,7 @@ class SettingViewController: UIViewController {
     var textColorView = [UIView]()
     var backgroundColorView = [UIView]()
     
-    let textColorArray = [UIColor.white, UIColor.red, UIColor.orange, UIColor.black, UIColor.darkGray]
+    let textColorArray = [UIColor.white, UIColor.red, UIColor.orange, UIColor.black, UIColor.purple]
     let backgroundColor = [UIColor.white, UIColor.black]
     
     override func viewDidLoad() {
@@ -107,7 +107,7 @@ class SettingViewController: UIViewController {
         for value in backgroundColorView {
             if value.tag == gesture.view?.tag {
                 if let color = value.backgroundColor {
-                    model.textColor = color
+                    model.backgroundColor = color
                     //MARK: POP
                     navigationController?.popViewController(animated: false)
                 }
