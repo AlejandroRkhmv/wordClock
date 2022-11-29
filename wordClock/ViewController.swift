@@ -46,7 +46,7 @@ class ViewController: UIViewController {
     
     //MARK: add gesture to mainView
     private func createGestureToMainView() {
-        let mainGesture = UITapGestureRecognizer(target: self, action: #selector(mainGesture(gesture:)))
+        let mainGesture = UITapGestureRecognizer(target: self, action: #selector(tapForGoToNextScreen(gesture:)))
         self.view.addGestureRecognizer(mainGesture)
     }
     
@@ -85,7 +85,7 @@ class ViewController: UIViewController {
             newLabel.textAlignment = .center
             newLabel.tag = index
             
-            let labelGesture = UIPanGestureRecognizer(target: self, action: #selector(containerViewGesture(gesture:)))
+            let labelGesture = UIPanGestureRecognizer(target: self, action: #selector(highlightWordsAfterPan(gesture:)))
             containerView.addGestureRecognizer(labelGesture)
             
             wordLabelsArray.append(newLabel)
@@ -152,7 +152,7 @@ class ViewController: UIViewController {
     
     //MARK: add @objc func
     
-    @objc func containerViewGesture(gesture: UIPanGestureRecognizer) {
+    @objc func highlightWordsAfterPan(gesture: UIPanGestureRecognizer) {
         
         for label in wordLabelsArray {
             
@@ -164,7 +164,7 @@ class ViewController: UIViewController {
         }
     }
     
-    @objc func mainGesture(gesture: UITapGestureRecognizer) {
+    @objc func tapForGoToNextScreen(gesture: UITapGestureRecognizer) {
         
         myTimer.invalidate()
         let secondVC = SecondViewController()
