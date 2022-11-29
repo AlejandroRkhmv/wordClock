@@ -58,7 +58,6 @@ class ViewController: UIViewController {
         
         containerView.frame = CGRect(x: 0, y: 0, width: sideOfContainerView, height: sideOfContainerView)
         containerView.center = self.view.center
-        change_color_of_words_and_background
         containerView.backgroundColor = model.backgroundColor
         self.view.addSubview(containerView)
         
