@@ -12,7 +12,6 @@ class ViewController: UIViewController {
     let model = Model.model
     
     let settingButton = UIButton()
-    
     let containerView = UIView()
     var wordLabelsArray = [UILabel]()
     var noMarksMinutesLabels = [UILabel]()
@@ -34,11 +33,11 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.view.backgroundColor = model.backgroundColor
         createSettingButton()
         createContainerView()
-        
-        myTimer = Timer.scheduledTimer(timeInterval: TimeInterval(period), target: self, selector: #selector(forTimer), userInfo: nil, repeats: true)
+        DispatchQueue.main.async {
+            self.myTimer = Timer.scheduledTimer(timeInterval: TimeInterval(self.period), target: self, selector: #selector(self.forTimer), userInfo: nil, repeats: true)
+        }
         createGestureToMainView()
         settingButton.addTarget(self, action: #selector(pushSettingButton), for: .touchUpInside)
        
@@ -58,7 +57,6 @@ class ViewController: UIViewController {
         
         containerView.frame = CGRect(x: 0, y: 0, width: sideOfContainerView, height: sideOfContainerView)
         containerView.center = self.view.center
-        containerView.backgroundColor = model.backgroundColor
         self.view.addSubview(containerView)
         
     }
@@ -96,7 +94,6 @@ class ViewController: UIViewController {
     private func createNoMarkMinutes() {
         
         let sideOfLabel = containerView.bounds.size.width / 11
-        
         var coordinateX = containerView.center.x - (sideOfLabel * 2)
         let coordinateY = containerView.bounds.size.height - (sideOfLabel / 2)
         
@@ -129,7 +126,6 @@ class ViewController: UIViewController {
                 label.textColor = .darkGray
             }
         }
-        print(indexOfLabels)
     }
     
     //MARK: create setting button
@@ -143,10 +139,7 @@ class ViewController: UIViewController {
         settingButton.setTitle("ADJUST", for: .normal)
         settingButton.setTitleColor(model.textColor, for: .normal)
         settingButton.titleLabel?.font = UIFont.init(name: "Courier", size: 25)
-        settingButton.backgroundColor = model.backgroundColor
-        
         self.view.addSubview(settingButton)
-        
     }
     
     //MARK: add @objc func
@@ -154,11 +147,10 @@ class ViewController: UIViewController {
     @objc func highlightWordsAfterPan(gesture: UIPanGestureRecognizer) {
         
         for label in wordLabelsArray {
-            
             let fingerPoint = gesture.location(in: label)
             
             if label.bounds.contains(fingerPoint) {
-                label.textColor = .white
+                label.textColor = model.textColor
             }
         }
     }
@@ -181,17 +173,13 @@ class ViewController: UIViewController {
         } else {
             wordLabelsArray[model.IndexOfecondsDivision].textColor = .darkGray
         }
-        
     }
 
     @objc func pushSettingButton() {
-        
-        //MARK: PUSH
+
         myTimer.invalidate()
         let settingVC = SettingViewController()
         self.navigationController?.pushViewController(settingVC, animated: false)
-        
     }
-
 }
 

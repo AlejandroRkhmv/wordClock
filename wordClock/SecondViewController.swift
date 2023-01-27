@@ -49,13 +49,13 @@ class SecondViewController: UIViewController {
                 positionX = self.view.center.x - (sideOfLabel * 4.5)
             } else if count == 20 {
                 positionY += sideOfLabel * 2
-                positionX = self.view.center.x - (sideOfLabel / 2)
-            } else if count == 22 {
+                positionX = self.view.center.x - (sideOfLabel * 3)
+            }  else if count == 27 {
+                    positionY += sideOfLabel * 2
+                    positionX = self.view.center.x - (sideOfLabel * 5)
+            } else if count == 38 {
                 positionY += sideOfLabel * 2
-                positionX = self.view.center.x - (sideOfLabel * 5)
-            } else if count == 32 {
-                positionY += sideOfLabel * 2
-                positionX = self.view.center.x - (sideOfLabel * 4.5)
+                positionX = self.view.center.x - (sideOfLabel * 4)
             }
         }
     }
