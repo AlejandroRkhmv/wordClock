@@ -26,7 +26,7 @@ class Model: NSObject {
                             "S", "E", "V", "E", "N", "T", "W", "E", "L", "V", "E",
                             "T", "E", "N", "S", "E", "O'", "C", "L", "O", "C", "K"]
     
-    let labelsOfNomarkMinutesView = ["+", "+", "+", "+"]
+    let labelsOfNomarkMinutesView = Array(repeating: "+", count: 4)
     
     let onePlus = [110]
     let twoPlus = [111]
@@ -72,11 +72,10 @@ class Model: NSObject {
     var secondsInt = 0
     
     var textColor = UIColor.white
-    var backgroundColor = UIColor.black
     
     //MARK: For second controller prop
     
-    let aboutString = "This clock was made by Alexander Rakhimov"
+    let aboutString = "This watch was made for the enjoyment of people"
     var tapCountForAboutScreen = 0
     
     
@@ -86,17 +85,12 @@ class Model: NSObject {
 
         dateFormatter.dateFormat = "HH:mm:ss"
         timeString = dateFormatter.string(from: Date())
-        print(timeString)
     }
     
     func whatTimeIsIt() -> [Int] {
         
-        
-        
         var resultArray = itisIndex
-        
         let timeArray = timeString.components(separatedBy: ":")
-        
         let hour = timeArray[0]
         let minutes = timeArray[1]
         let seconds = timeArray[2]
@@ -105,24 +99,19 @@ class Model: NSObject {
             hourInt = temporaryHours
             minutesInt = temporaryMinutes
             secondsInt = temporarySeconds
-        
-        print(hourInt, minutesInt, secondsInt)
         // pm am
-        if hourInt > 12 {
+        if hourInt >= 12 {
             resultArray += pmIndex
         } else {
             resultArray += amIndex
         }
-        
         //plusMinutes
         resultArray += plusMinutesShow()
         
         if minutesInt < 5 {
-            
             resultArray += transformHoursIntToArrayOfNumbers(param: 0)
             resultArray += oClock
         } else if minutesInt == 30 {
-            
             resultArray += halfIndex + pastIndex
             //hours
             resultArray += transformHoursIntToArrayOfNumbers(param: 0)
@@ -133,9 +122,7 @@ class Model: NSObject {
             case 31...34: resultArray += halfIndex
             default: break
             }
-            
             //minutes
-            
             var resultMinutes = [Int]()
             switch minutesInt {
             case 5...9: resultMinutes = fiveMinutes
@@ -150,7 +137,6 @@ class Model: NSObject {
             resultArray += transformHoursIntToArrayOfNumbers(param: 0)
         } else {
             resultArray += toIndex
-            
             //minutes
             var resultMinutes = [Int]()
             switch minutesInt {
@@ -168,7 +154,6 @@ class Model: NSObject {
         
         return resultArray
     }
-    
     // for hours
     private func transformHoursIntToArrayOfNumbers(param: Int) -> [Int] {
         
@@ -192,7 +177,6 @@ class Model: NSObject {
         
         return resultHoursArray
     }
-    
     //plusMinutesShow
     private func plusMinutesShow() -> [Int] {
         
@@ -205,9 +189,6 @@ class Model: NSObject {
         case 4, 9, 14, 19, 24, 29, 34, 39, 44, 49, 54, 59: resultOfPlus = onePlus + twoPlus + threePlus + fourPlus
         default: break
         }
-        
         return resultOfPlus
     }
-    
-    
 }

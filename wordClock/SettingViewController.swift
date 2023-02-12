@@ -13,16 +13,12 @@ class SettingViewController: UIViewController {
     
     var labels = [UILabel]()
     var textColorView = [UIView]()
-    var backgroundColorView = [UIView]()
-    
-    let textColorArray = [UIColor.white, UIColor.red, UIColor.orange, UIColor.black, UIColor.purple]
-    let backgroundColor = [UIColor.white, UIColor.black]
+    let textColorArray = [UIColor.white, UIColor.red, UIColor.orange, UIColor.purple]
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         createLabel(x: Int(self.view.center.x), y: Int(self.view.bounds.size.height * 0.25), text: "CHOOSE TEXT COLOR")
-        createLabel(x: Int(self.view.center.x), y: Int(self.view.bounds.size.height * 0.5), text: "CHOOSE BACKGROUND COLOR")
         
         createTextColorView()
     }
@@ -47,7 +43,7 @@ class SettingViewController: UIViewController {
         
         let sideOfColorView = self.view.bounds.size.width / 10
         
-        var positionX = self.view.center.x - (sideOfColorView * 3)
+        var positionX = self.view.center.x - (sideOfColorView * 2.25)
         let betweenColors = sideOfColorView / 2
         
         for (index, value) in textColorArray.enumerated() {
@@ -68,23 +64,6 @@ class SettingViewController: UIViewController {
         }
         
         positionX = self.view.center.x - (sideOfColorView / 2)
-        
-        for (index, value) in backgroundColor.enumerated() {
-            
-            let colorView = UIView(frame: CGRect(x: 0, y: 0, width: sideOfColorView, height: sideOfColorView))
-            colorView.center = CGPoint(x: Int(positionX), y: Int(self.view.bounds.size.height * 0.6))
-            colorView.backgroundColor = value
-            colorView.layer.cornerRadius = 5
-            colorView.layer.borderWidth = 2
-            colorView.layer.borderColor = UIColor.lightGray.cgColor
-            colorView.tag = index
-            backgroundColorView.append(colorView)
-            self.view .addSubview(colorView)
-            positionX += sideOfColorView + betweenColors
-
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapBackgroundColor(gesture:)))
-            colorView.addGestureRecognizer(tapGesture)
-        }
     }
     
     //MARK: create objc func for gestures
@@ -95,20 +74,6 @@ class SettingViewController: UIViewController {
             if value.tag == gesture.view?.tag {
                 if let color = value.backgroundColor {
                     model.textColor = color
-                    //MARK: POP
-                    navigationController?.popViewController(animated: false)
-                }
-            }
-        }
-    }
-    
-    @objc func tapBackgroundColor(gesture: UITapGestureRecognizer) {
-        
-        for value in backgroundColorView {
-            if value.tag == gesture.view?.tag {
-                if let color = value.backgroundColor {
-                    model.backgroundColor = color
-                    //MARK: POP
                     navigationController?.popViewController(animated: false)
                 }
             }
