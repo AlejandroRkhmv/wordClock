@@ -43,7 +43,12 @@ final class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+<<<<<<< HEAD
         
+=======
+        createSettingButton()
+        createContainerView()
+>>>>>>> addSaveChoosingColor
         DispatchQueue.main.async {
             self.myTimer = Timer.scheduledTimer(timeInterval: TimeInterval(self.period), target: self, selector: #selector(self.forTimer), userInfo: nil, repeats: true)
         }

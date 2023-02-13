@@ -10,9 +10,7 @@ import UIKit
 class Model: NSObject {
     
     static let model = Model()
-    private override init() {
-        
-    }
+    private override init() { }
     
     //MARK: for first controller prop
     let labelOfWordViews = ["I", "T", ":", "I", "S", "A", "S", "A", "M", "P", "M",
