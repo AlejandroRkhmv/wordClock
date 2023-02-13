@@ -71,7 +71,18 @@ class Model: NSObject {
     var minutesInt = 0
     var secondsInt = 0
     
-    var textColor = UIColor.white
+    var textColor: UIColor {
+        get {
+            if UserDefaults.standard.object(forKey: KeysColor.red.rawValue) != nil {
+                return loadColor()
+            } else {
+                return .white
+            }
+        }
+        set {
+            saveColor(color: newValue)
+        }
+    }
     
     //MARK: For second controller prop
     
@@ -191,4 +202,37 @@ class Model: NSObject {
         }
         return resultOfPlus
     }
+    
+    func saveColor(color: UIColor) {
+        let defaults = UserDefaults.standard
+        
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+
+        color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        
+        defaults.set(red, forKey: KeysColor.red.rawValue)
+        defaults.set(green, forKey: KeysColor.green.rawValue)
+        defaults.set(blue, forKey: KeysColor.blue.rawValue)
+        defaults.set(alpha, forKey: KeysColor.alpha.rawValue)
+    }
+    
+    func loadColor() -> UIColor {
+        let defaults = UserDefaults.standard
+        guard let red = defaults.object(forKey: KeysColor.red.rawValue) as? CGFloat,
+              let green = defaults.object(forKey: KeysColor.green.rawValue) as? CGFloat,
+              let blue = defaults.object(forKey: KeysColor.blue.rawValue) as? CGFloat,
+              let alpha = defaults.object(forKey: KeysColor.alpha.rawValue) as? CGFloat else { return UIColor() }
+        
+        return UIColor(red: red, green: green, blue: blue, alpha: alpha)
+    }
+}
+
+enum KeysColor: String {
+    case red
+    case green
+    case blue
+    case alpha
 }

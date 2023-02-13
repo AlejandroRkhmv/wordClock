@@ -73,10 +73,18 @@ class SettingViewController: UIViewController {
         for value in textColorView {
             if value.tag == gesture.view?.tag {
                 if let color = value.backgroundColor {
+                    clearUserDefaults()
                     model.textColor = color
                     navigationController?.popViewController(animated: false)
                 }
             }
         }
+    }
+    
+    private func clearUserDefaults() {
+        UserDefaults.standard.removeObject(forKey: KeysColor.red.rawValue)
+        UserDefaults.standard.removeObject(forKey: KeysColor.green.rawValue)
+        UserDefaults.standard.removeObject(forKey: KeysColor.blue.rawValue)
+        UserDefaults.standard.removeObject(forKey: KeysColor.alpha.rawValue)
     }
 }
