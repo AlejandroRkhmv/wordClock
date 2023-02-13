@@ -32,7 +32,6 @@ class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         createSettingButton()
         createContainerView()
         DispatchQueue.main.async {
@@ -182,4 +181,6 @@ class ViewController: UIViewController {
         self.navigationController?.pushViewController(settingVC, animated: false)
     }
 }
+
+
 
