@@ -16,6 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowsSccene = (scene as? UIWindowScene) else { return }
         
         let startVC = ViewController()
+        guard let isPortrait = window?.windowScene?.interfaceOrientation.isPortrait else { return }
+        startVC.startOrientation = isPortrait ? true : false
         let navigationVC = UINavigationController(rootViewController: startVC)
         navigationVC.navigationBar.isHidden = true
         

@@ -19,6 +19,7 @@ final class ViewController: UIViewController {
     var myTimer = Timer()
     let period = 1
     var countOfSeconds = 0
+    var startOrientation: Bool?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,10 +48,13 @@ final class ViewController: UIViewController {
         switch UIDevice.current.orientation {
         case .portrait:
             settingButton.isHidden = false
+            startOrientation = true
         case .landscapeLeft:
             settingButton.isHidden = true
+            startOrientation = false
         case .landscapeRight:
             settingButton.isHidden = true
+            startOrientation = false
         default: break
         }
     }
@@ -199,7 +203,8 @@ final class ViewController: UIViewController {
     }
     
     @objc func tapForGoToNextScreen(gesture: UITapGestureRecognizer) {
-        guard UIDevice.current.orientation == .portrait else { return }
+        
+        guard let startOrientation = startOrientation, startOrientation else { return }
         myTimer.invalidate()
         let secondVC = SecondViewController()
         self.navigationController?.pushViewController(secondVC, animated: false)
