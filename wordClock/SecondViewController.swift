@@ -12,10 +12,10 @@ class SecondViewController: UIViewController {
     let model = Model.model
     let mainAnimator = UIDynamicAnimator()
     var aboutLabels = [UILabel]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        (UIApplication.shared.delegate as! AppDelegate).supportedInterfaceOrientationsFor = .portrait
         createAboutLabels()
         addGesture()
     }
@@ -61,6 +61,7 @@ class SecondViewController: UIViewController {
     }
 
     //MARK: add gesture
+    
     private func addGesture() {
 
         let gesture = UITapGestureRecognizer(target: self, action: #selector(createAnimation))
@@ -89,6 +90,7 @@ class SecondViewController: UIViewController {
             mainAnimator.addBehavior(gravity)
 
             //MARK: POP
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(2), execute: { [self] in
 
                 self.navigationController?.popViewController(animated: false)

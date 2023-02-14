@@ -13,6 +13,7 @@ class Model: NSObject {
     private override init() { }
     
     //MARK: for first controller prop
+    
     let labelOfWordViews = ["I", "T", ":", "I", "S", "A", "S", "A", "M", "P", "M",
                             "A", "C", "Q", "U", "A", "R", "T", "E", "R", "D", "C",
                             "T", "W", "E", "N", "T", "Y", "F", "I", "V", "E", "X",
@@ -69,6 +70,8 @@ class Model: NSObject {
     var minutesInt = 0
     var secondsInt = 0
     
+    // MARK: - set new color and save in User Defaults
+    
     var textColor: UIColor {
         get {
             if UserDefaults.standard.object(forKey: KeysColor.red.rawValue) != nil {
@@ -95,6 +98,8 @@ class Model: NSObject {
         dateFormatter.dateFormat = "HH:mm:ss"
         timeString = dateFormatter.string(from: Date())
     }
+    
+    // MARK: - main func for show time
     
     func whatTimeIsIt() -> [Int] {
         
@@ -201,6 +206,8 @@ class Model: NSObject {
         return resultOfPlus
     }
     
+    // MARK: - functions for User Defaults
+    
     func saveColor(color: UIColor) {
         let defaults = UserDefaults.standard
         
@@ -227,6 +234,8 @@ class Model: NSObject {
         return UIColor(red: red, green: green, blue: blue, alpha: alpha)
     }
 }
+
+// MARK: - keys for User Defaults
 
 enum KeysColor: String {
     case red

@@ -17,7 +17,7 @@ class SettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        (UIApplication.shared.delegate as! AppDelegate).supportedInterfaceOrientationsFor = .portrait
         createLabel(x: Int(self.view.center.x), y: Int(self.view.bounds.size.height * 0.25), text: "CHOOSE TEXT COLOR")
         
         createTextColorView()
@@ -81,6 +81,7 @@ class SettingViewController: UIViewController {
         }
     }
     
+    // MARK: - clear User Defaults before set new color
     private func clearUserDefaults() {
         UserDefaults.standard.removeObject(forKey: KeysColor.red.rawValue)
         UserDefaults.standard.removeObject(forKey: KeysColor.green.rawValue)
