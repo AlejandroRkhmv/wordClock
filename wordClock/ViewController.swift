@@ -21,6 +21,7 @@ final class ViewController: UIViewController {
     var countOfSeconds = 0
     var startOrientation: Bool?
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         start()
@@ -34,6 +35,7 @@ final class ViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
         DispatchQueue.main.async {
             self.myTimer = Timer.scheduledTimer(timeInterval: TimeInterval(self.period), target: self, selector: #selector(self.forTimer), userInfo: nil, repeats: true)
         }
@@ -85,7 +87,8 @@ final class ViewController: UIViewController {
     
     private func createContainerView() {
         var sideOfContainerView: CGFloat = 0
-        if UIDevice.current.orientation == .portrait {
+        guard let startOrientation = startOrientation else { return }
+        if startOrientation {
             sideOfContainerView = (view.bounds.size.width / 12) * 11
         } else {
             sideOfContainerView = (view.bounds.size.height / 12) * 11
